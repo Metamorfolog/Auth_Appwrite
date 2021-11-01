@@ -12,25 +12,28 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Auth App',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        buttonColor: Colors.red,
-        inputDecorationTheme: const InputDecorationTheme(
-          border: OutlineInputBorder(),
-        ),
-        buttonTheme: ButtonThemeData(
-          height: 50.0,
-          textTheme: ButtonTextTheme.primary,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        title: 'Auth App',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          buttonColor: Colors.red,
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(),
+          ),
+          buttonTheme: ButtonThemeData(
+            height: 50.0,
+            textTheme: ButtonTextTheme.primary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
           ),
         ),
+        home: MainScreen(),
+        onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
-      home: MainScreen(),
-      onGenerateRoute: AppRoutes.onGenerateRoute,
     );
   }
 }
