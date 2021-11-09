@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/models.dart';
 import 'package:auth_app/login_service/res/app_constants.dart';
 import 'package:flutter/widgets.dart';
 
@@ -15,6 +16,8 @@ class TransactionState extends ChangeNotifier {
   TransactionState() {
     _init();
   }
+
+  set data(List<Transaction> data) {}
   _init() {
     client.setEndpoint(AppConstants.endpoint).setProject(
           AppConstants.project,
@@ -22,30 +25,20 @@ class TransactionState extends ChangeNotifier {
     db = Database(client);
   }
 
-  // Future<List<Transaction>?> transactions() async {
-  //   try {
-  //     Response res =
-  //         await db.listDocuments(collectionId: collectionId) as Response;
-  //     return List<Transaction>.from(
-  //         res.data["documents"].map((tr) => Transaction.fromJson(tr)));
-  //   } on AppwriteException catch (e) {
-  //     print(e.message);
-  //     return null;
-  //   }
-  // }
+  Future seeTransaction() async {
+    var result = await db.listDocuments(collectionId: collectionId);
+    print("Success " + result.documents.length.toString());
+    var data =
+        (result.documents).map((e) => Transaction.fromJson(e.data)).toList();
+    print(data.toList());
+  }
 
-  Future<List<Transaction>?> readTransactions() async {
-    try {
-      final res = await db
-          .listDocuments(
-            collectionId: AppConstants.transactionCollection,
-          )
-          .toString();
-      print(res);
-      debugPrint(res);
-    } on AppwriteException catch (e) {
-      print(e.message);
-      return null;
+  Future<List<Transaction>> transactions() async {
+    {
+      DocumentList result = await db.listDocuments(collectionId: collectionId);
+
+      return data =
+          (result.documents).map((e) => Transaction.fromJson(e.data)).toList();
     }
   }
 }

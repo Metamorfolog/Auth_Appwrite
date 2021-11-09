@@ -1,5 +1,5 @@
 class Transaction {
-  late String id;
+  String id = "1";
   late String collection;
   late Permissions permissions;
   late String title;
@@ -41,6 +41,8 @@ class Transaction {
     createdAt = DateTime.fromMillisecondsSinceEpoch(json['created_at']);
     updatedAt = DateTime.fromMillisecondsSinceEpoch(json['updated_at']);
   }
+
+  //Map<String, dynamic> get data => null;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
