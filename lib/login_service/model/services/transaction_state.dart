@@ -3,7 +3,7 @@ import 'package:appwrite/models.dart';
 import 'package:auth_app/login_service/res/app_constants.dart';
 import 'package:flutter/widgets.dart';
 
-import '../transaction.dart';
+import '../../../transactions/model/transaction.dart';
 
 class TransactionState extends ChangeNotifier {
   final String collectionId = AppConstants.transactionCollection;

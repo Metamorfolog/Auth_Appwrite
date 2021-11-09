@@ -19,6 +19,15 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: TransactionList(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+        ),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          AppRoutes.addTransaction,
+        ),
+      ),
     );
   }
 }

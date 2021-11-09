@@ -1,7 +1,7 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/foundation.dart';
-import '/login_service/model/transaction.dart';
+import '../../../transactions/model/transaction.dart';
 import '/login_service/res/app_constants.dart';
 
 class ApiService {

@@ -1,7 +1,8 @@
 import 'dart:ui';
 
 import 'package:auth_app/login_service/model/services/transaction_state.dart';
-import 'package:auth_app/login_service/model/transaction.dart';
+import 'package:auth_app/presentation/routes.dart';
+import 'package:auth_app/transactions/model/transaction.dart';
 import 'package:auth_app/login_service/res/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -28,6 +29,11 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                       DateFormat.yMMMEd().format(transaction.transactionDate)),
                   trailing: Text(transaction.amount.toString()),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    AppRoutes.transactionDetails,
+                    arguments: transaction,
+                  ),
                 );
               },
             );
