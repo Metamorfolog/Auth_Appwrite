@@ -26,20 +26,23 @@ class Transaction {
   });
 
   Transaction.fromJson(Map<String, dynamic> json) {
-    id = json['$id'];
-    collection = json['$collection'];
-    permissions = (json['$permissions'] != null
-        ? new Permissions.fromJson(json['$permissions'])
+    print(json.toString());
+    id = json["\$id"];
+    collection = json["\$collection"];
+    permissions = (json["\$permissions"] != null
+        ? new Permissions.fromJson(json["\$permissions"])
         : null)!;
     title = json['title'];
     description = json['description'];
     userId = json['user_id'];
     transactionType = json['transaction_type'];
     amount = json['amount'];
-    transactionDate =
-        DateTime.fromMillisecondsSinceEpoch(json['transaction_date']);
-    createdAt = DateTime.fromMillisecondsSinceEpoch(json['created_at']);
-    updatedAt = DateTime.fromMillisecondsSinceEpoch(json['updated_at']);
+    transactionDate = DateTime.fromMillisecondsSinceEpoch(
+        int.parse(json['transaction_date']));
+    createdAt =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(json['created_at']));
+    updatedAt =
+        DateTime.fromMillisecondsSinceEpoch(int.parse(json['updated_at']));
   }
 
   //Map<String, dynamic> get data => null;
