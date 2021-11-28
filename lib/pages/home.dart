@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Budgeter'),
+        title: Text('Projebaný prachy'),
         actions: [
           IconButton(
             icon: Icon(Icons.person),

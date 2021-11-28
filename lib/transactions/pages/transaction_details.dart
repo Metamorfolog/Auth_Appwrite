@@ -18,7 +18,7 @@ class TransactionDetails extends StatelessWidget {
         padding: EdgeInsets.all(16),
         children: [
           Text(
-            DateFormat.yMMMEd().format(transaction.transactionDate),
+            DateFormat('dd.MM.yyyy').format(transaction.transactionDate),
             textAlign: TextAlign.right,
             style: TextStyle(
               fontSize: 18,

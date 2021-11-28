@@ -8,7 +8,9 @@ class WaitingScreen extends StatelessWidget {
         title: Text('Načítání'),
       ),
       body: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(
+          color: Colors.black,
+        ),
       ),
     );
   }

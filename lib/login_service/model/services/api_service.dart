@@ -1,7 +1,6 @@
 import 'package:appwrite/appwrite.dart';
+//import 'package:auth_app/login_service/model/user.dart';
 import 'package:appwrite/models.dart';
-import 'package:flutter/foundation.dart';
-import '../../../transactions/model/transaction.dart';
 import '/login_service/res/app_constants.dart';
 
 class ApiService {
@@ -9,6 +8,9 @@ class ApiService {
   late final Client _client;
   late final Account _account;
   late final Database _db;
+  final User? _user = null;
+
+  User? get user => _user;
 
   ApiService._internal() {
     _client = Client(
@@ -43,7 +45,7 @@ class ApiService {
 
   Future<User> getUser() async {
     User res;
-    return res = await _account.get();
+    return res = (await _account.get()) as User;
   }
 
   Future logout() {

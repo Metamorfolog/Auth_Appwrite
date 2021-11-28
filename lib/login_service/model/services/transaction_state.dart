@@ -41,4 +41,32 @@ class TransactionState extends ChangeNotifier {
           (result.documents).map((e) => Transaction.fromJson(e.data)).toList();
     }
   }
+
+  Future addTransaction(Transaction transaction) async {
+    try {
+      var res = await db.createDocument(
+        collectionId: AppConstants.transactionCollection,
+        data: transaction.toJson(),
+        read: ["user:${transaction.userId}"],
+        write: ["user:${transaction.userId}"],
+      );
+      print(res);
+    } on AppwriteException catch (e) {
+      print(e.message);
+    }
+  }
+
+  // Future addTransaction(Transaction transaction) async {
+  //   try {
+  //     Response res = await db.createDocument(
+  //       collectionId: AppConstants.transactionCollection,
+  //       data: transaction.toJson(),
+  //       read: ["user:${transaction.userId}"],
+  //       write: ["user:${transaction.userId}"],
+  //     );
+  //   } on AppwriteException catch (e) {
+  //     print(e.message);
+  //   }
+  // }
+
 }

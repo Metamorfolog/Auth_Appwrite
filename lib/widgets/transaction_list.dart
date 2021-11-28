@@ -26,8 +26,8 @@ class TransactionList extends StatelessWidget {
                       ? Icons.account_balance_wallet
                       : Icons.view_list),
                   title: Text(transaction.title),
-                  subtitle: Text(
-                      DateFormat.yMMMEd().format(transaction.transactionDate)),
+                  subtitle: Text(DateFormat('dd.MM.yyyy')
+                      .format(transaction.transactionDate)),
                   trailing: Text(transaction.amount.toString()),
                   onTap: () => Navigator.pushNamed(
                     context,

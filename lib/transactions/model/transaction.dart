@@ -1,7 +1,7 @@
 class Transaction {
-  String id = "1";
-  late String collection;
-  late Permissions permissions;
+  String? id;
+  late String? collection;
+  late Permissions? permissions;
   late String title;
   late String description;
   late String userId;
@@ -12,9 +12,9 @@ class Transaction {
   late DateTime updatedAt;
 
   Transaction({
-    required this.id,
-    required this.collection,
-    required this.permissions,
+    this.id,
+    this.collection,
+    this.permissions,
     required this.title,
     required this.description,
     required this.userId,
@@ -49,19 +49,14 @@ class Transaction {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['$id'] = this.id;
-    data['$collection'] = this.collection;
-    if (this.permissions != null) {
-      data['$permissions'] = this.permissions.toJson();
-    }
     data['title'] = this.title;
     data['description'] = this.description;
     data['user_id'] = this.userId;
     data['transaction_type'] = this.transactionType;
     data['amount'] = this.amount;
-    data['transaction_date'] = this.transactionDate;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['transaction_date'] = this.transactionDate.millisecondsSinceEpoch;
+    data['created_at'] = this.createdAt.millisecondsSinceEpoch;
+    data['updated_at'] = this.updatedAt.millisecondsSinceEpoch;
     return data;
   }
 }

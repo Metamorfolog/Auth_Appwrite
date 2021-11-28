@@ -1,5 +1,7 @@
 import 'package:auth_app/login_service/model/services/api_service.dart';
+import 'package:auth_app/login_service/model/services/transaction_state.dart';
 import 'package:auth_app/transactions/model/transaction.dart';
+import 'package:auth_app/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,19 +72,19 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             TextInputType.text,
             "Název",
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           TransactionInfoField(
             _amountController,
             TextInputType.number,
             "Cena",
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           TransactionInfoField(
             _descriptionController,
             TextInputType.text,
             "Poznámka",
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           CalendarDatePicker(
             firstDate: DateTime(today.year - 5),
             lastDate: today,
@@ -93,7 +95,59 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               });
             },
           ),
+          const SizedBox(height: 10.0),
+          /*Center(
+            child: RaisedButton(
+              padding: EdgeInsets.all(5),
+              child: Text("Uložit"),
+              //backgroundColor: Colors.pink,
+              onPressed: () async {
+                //String userId = Provider.of<ApiService>(context, listen: false).user.$id;
+                debugPrint("-------Tady Jsem-------");
+
+                Transaction transaction = Transaction(
+                  title: _titleController.text,
+                  amount: int.parse(_amountController.text),
+                  description: _descriptionController.text,
+                  transactionDate: _tDate,
+                  transactionType: _transactionType,
+                  userId: ApiService.instance.user.$id,
+                  createdAt: DateTime.now(),
+                  updatedAt: DateTime.now(),
+                );
+                TransactionState ts =
+                    Provider.of<TransactionState>(context, listen: false);
+                ts.addTransaction(transaction);
+                Navigator.pop(context);
+              },
+            ),
+          ),*/
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.save_rounded,
+        ),
+        onPressed: () async {
+          String userId =
+              Provider.of<ApiService>(context, listen: false).user!.$id;
+          debugPrint("-------Tady Jsem-------");
+
+          Transaction transaction = Transaction(
+            title: _titleController.text,
+            amount: int.parse(_amountController.text),
+            description: _descriptionController.text,
+            transactionDate: _tDate,
+            transactionType: _transactionType,
+            userId: userId,
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          );
+          TransactionState ts =
+              Provider.of<TransactionState>(context, listen: false);
+          ts.addTransaction(transaction);
+          Navigator.of(context).pop();
+        },
       ),
     );
   }
