@@ -54,9 +54,10 @@ class Transaction {
     data['user_id'] = this.userId;
     data['transaction_type'] = this.transactionType;
     data['amount'] = this.amount;
-    data['transaction_date'] = this.transactionDate.millisecondsSinceEpoch;
-    data['created_at'] = this.createdAt.millisecondsSinceEpoch;
-    data['updated_at'] = this.updatedAt.millisecondsSinceEpoch;
+    data['transaction_date'] =
+        this.transactionDate.millisecondsSinceEpoch.toString();
+    data['created_at'] = this.createdAt.millisecondsSinceEpoch.toString();
+    data['updated_at'] = this.updatedAt.millisecondsSinceEpoch.toString();
     return data;
   }
 }

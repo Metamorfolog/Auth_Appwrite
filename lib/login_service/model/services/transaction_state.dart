@@ -10,7 +10,9 @@ class TransactionState extends ChangeNotifier {
   Client client = Client();
   late Database db;
   late String _error;
+  late List<Transaction> _transactions;
 
+  List<Transaction> get transactions => _transactions;
   String get error => _error;
 
   TransactionState() {
@@ -23,22 +25,18 @@ class TransactionState extends ChangeNotifier {
           AppConstants.project,
         );
     db = Database(client);
+    _transactions = [];
+    getTransactions();
   }
 
-  Future seeTransaction() async {
-    var result = await db.listDocuments(collectionId: collectionId);
-    print("Success " + result.documents.length.toString());
-    var data =
-        (result.documents).map((e) => Transaction.fromJson(e.data)).toList();
-    print(data.toList());
-  }
-
-  Future<List<Transaction>> transactions() async {
-    {
+  Future<List<Transaction>?> getTransactions() async {
+    try {
       DocumentList result = await db.listDocuments(collectionId: collectionId);
-
-      return data =
+      _transactions =
           (result.documents).map((e) => Transaction.fromJson(e.data)).toList();
+      notifyListeners();
+    } on AppwriteException catch (e) {
+      return null;
     }
   }
 
@@ -50,23 +48,25 @@ class TransactionState extends ChangeNotifier {
         read: ["user:${transaction.userId}"],
         write: ["user:${transaction.userId}"],
       );
+      _transactions.add(Transaction.fromJson(res.data));
+      notifyListeners();
       print(res);
     } on AppwriteException catch (e) {
       print(e.message);
     }
   }
 
-  // Future addTransaction(Transaction transaction) async {
-  //   try {
-  //     Response res = await db.createDocument(
-  //       collectionId: AppConstants.transactionCollection,
-  //       data: transaction.toJson(),
-  //       read: ["user:${transaction.userId}"],
-  //       write: ["user:${transaction.userId}"],
-  //     );
-  //   } on AppwriteException catch (e) {
-  //     print(e.message);
-  //   }
-  // }
-
+  Future deleteTransaction(Transaction transaction) async {
+    try {
+      await db.deleteDocument(
+        collectionId: collectionId,
+        documentId: transaction.id.toString(),
+      );
+      _transactions = List<Transaction>.from(
+          _transactions.where((trans) => trans.id != transaction.id));
+      notifyListeners();
+    } on AppwriteException catch (e) {
+      print(e.message);
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:auth_app/login_service/model/user.dart';
 import 'package:auth_app/pages/main_screen.dart';
 import 'package:auth_app/transactions/model/transaction.dart';
 import 'package:auth_app/transactions/pages/add_transaction.dart';

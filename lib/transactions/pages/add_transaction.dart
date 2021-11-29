@@ -96,32 +96,6 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
             },
           ),
           const SizedBox(height: 10.0),
-          /*Center(
-            child: RaisedButton(
-              padding: EdgeInsets.all(5),
-              child: Text("Uložit"),
-              //backgroundColor: Colors.pink,
-              onPressed: () async {
-                //String userId = Provider.of<ApiService>(context, listen: false).user.$id;
-                debugPrint("-------Tady Jsem-------");
-
-                Transaction transaction = Transaction(
-                  title: _titleController.text,
-                  amount: int.parse(_amountController.text),
-                  description: _descriptionController.text,
-                  transactionDate: _tDate,
-                  transactionType: _transactionType,
-                  userId: ApiService.instance.user.$id,
-                  createdAt: DateTime.now(),
-                  updatedAt: DateTime.now(),
-                );
-                TransactionState ts =
-                    Provider.of<TransactionState>(context, listen: false);
-                ts.addTransaction(transaction);
-                Navigator.pop(context);
-              },
-            ),
-          ),*/
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -129,10 +103,9 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
           Icons.save_rounded,
         ),
         onPressed: () async {
-          String userId =
-              Provider.of<ApiService>(context, listen: false).user!.$id;
-          debugPrint("-------Tady Jsem-------");
-
+          debugPrint("-------Tady Končím?-------");
+          String userId = (await ApiService.instance.getUser()).$id;
+          debugPrint("-------WoooHoooo-------");
           Transaction transaction = Transaction(
             title: _titleController.text,
             amount: int.parse(_amountController.text),

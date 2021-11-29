@@ -1,9 +1,10 @@
 import 'package:appwrite/appwrite.dart';
 //import 'package:auth_app/login_service/model/user.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter/cupertino.dart';
 import '/login_service/res/app_constants.dart';
 
-class ApiService {
+class ApiService extends ChangeNotifier {
   static ApiService? _instance;
   late final Client _client;
   late final Account _account;
@@ -51,71 +52,4 @@ class ApiService {
   Future logout() {
     return _account.deleteSession(sessionId: 'current');
   }
-
-  // Future oAuthLogin(String provider) {
-  //   return _account.createOAuth2Session(provider: provider);
-  // }
-
-  // Future<Transaction> addTransaction({
-  //   required Transaction transaction,
-  //   required List<String> read,
-  //   required List<String> write,
-  // }) async {
-  //   final res = await _db.createDocument(
-  //     collectionId: AppConstants.entriesCollection,
-  //     data: transaction.toJson(),
-  //     read: read,
-  //     write: write,
-  //   );
-  //   return Transaction.fromJson(res.data);
-  // }
-
-  // Future<List<Transaction>> readTransactions() async {
-  //   final res = await _db.listDocuments(
-  //       collectionId: AppConstants.transactionCollection);
-  //   print(res);
-  //   return List<Map<String, dynamic>>.from(res.documents)
-  //       .map((e) => Transaction.fromJson(e))
-  //       .toList();
-  // }
-
-  // Future readTransaction() async {
-  //   var result = await _db.listDocuments(
-  //     collectionId: AppConstants.entriesCollection,
-  //   );
-
-  //   return result.then((response) {
-  //     print(response);
-  //     print(result);
-  //   }).catchError((error) {
-  //     print(error.response);
-  //   });
-  // }
-
-  // Future<List<Transaction>?> readTransactions() async {
-  //   try {
-  //     final res = await _db
-  //         .listDocuments(
-  //           collectionId: AppConstants.transactionCollection,
-  //         )
-  //         .toString();
-  //     print(res);
-  //     debugPrint(res);
-  //   } on AppwriteException catch (e) {
-  //     print(e.message);
-  //     return null;
-  //   }
-  // }
-
-  // Future<List<Transaction>?> transactions() async {
-  //   try {
-  //     Response res = await _db.listDocuments(
-  //         collectionId: AppConstants.transactionCollection) as Response;
-  //     return List<Transaction>.from(
-  //         res.data["documents"].map((tr) => Transaction.fromJson(tr)));
-  //   } on AppwriteException catch (e) {
-  //     print(e.message);
-  //     return null;
-  //   }
-  // }
 }
